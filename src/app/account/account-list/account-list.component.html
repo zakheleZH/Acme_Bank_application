@@ -1,0 +1,48 @@
+<div class="container">
+  <!-- No data message -->
+  <p *ngIf="Accounts.length <= 0" class="no-data text-center">There is no Account added yet!</p>
+<h1 id="account_list">Account List</h1>
+  <!-- Account list -->
+  <table class="table table-striped" *ngIf="Accounts.length > 0">
+    <thead class="">
+      <tr>
+        <th scope="col">Account Number</th>
+        <th scope="col">Account Type</th>
+        <th scope="col">Balance</th>
+
+      </tr>
+    </thead>
+    <tbody>
+      <tr *ngFor="let Account of Accounts; let i = index">
+
+        <td>{{Account.account_number}}</td>
+        <td>{{Account.account_type}}</td>
+        <td>{{Account.balance|currency:'ZAR'}}</td>
+
+        <td>
+
+        <div *ngIf="Account.balance>0;else other_content">
+          <button class="btn btn-primary" (click)="onWithdraw()">Withdraw</button>
+        </div>
+        <ng-template #other_content>
+          <button disabled class="btn btn-light">Withdraw </button>
+
+        </ng-template>
+      </td>
+
+      </tr>
+      <tr>
+        <td>
+          <b>Balance</b>
+        </td>
+        <td>
+
+        </td>
+        <td>
+         {{total|currency:'ZAR' }}
+        </td>
+      </tr>
+
+    </tbody>
+  </table>
+</div>
